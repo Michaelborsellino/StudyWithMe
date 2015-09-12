@@ -1,4 +1,4 @@
-
+<!doctype html>
 
 <html>
   <head>
@@ -13,27 +13,45 @@
 	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
 
-	<link rel="stylesheet" href="css/todc-bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/todc-bootstrap.min.css">
 
-	var myDataRef = new Firebase('https://i927yr7wq0q.firebaseio-demo.com/');
+
   </head>
   <body>
+  <h1> Firebase Test </h1>
 
-  <input type='text' id='nameInput' placeholder='Name'>
+  <div id='messagesDiv'></div>
   <br>
-  <input type='text' id='messageInput' placeholder='Message'>
+  <input class="form-control" type='text' id='nameInput' placeholder='Name'>
+  <br><br>
+  <input class="form-control" type='text' id='messageInput' placeholder='Message'>
   <br>
 
   <script>
   	var myDataRef = new Firebase('https://i927yr7wq0q.firebaseio-demo.com/');
-  	$('#messageInput').keypress(function (e)) {
+  	$('#messageInput').keypress(function (e) {
   		if (e.keyCode == 13 ) { //enter key
 
   			var name = $('#nameInput').val();
           	var text = $('#messageInput').val();
+
+          	//myDataRef.set('User ' + name + ' says ' + text);
+          	myDataRef.push({name: name, text: text});
+
   			$('#messageInput').val('');
   		}
-  	}
+  	});
+
+  	//We need to tell the database to notify us when chat messages arrive
+  	//On() @params eventType, callbackFunction
+  	myDataRef.on('child_added', function(snapshot) {
+        var message = snapshot.val();
+        displayChatMessage(message.name, message.text);
+      });
+      function displayChatMessage(name, text) {
+        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+      };
   </script>
   </body>
 </html>
