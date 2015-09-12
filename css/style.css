@@ -50,7 +50,7 @@ html, body {
 }
 
 #services {
-  background-color: #B9DBCB;
+  background-color: #D6E8E8;
   color: #ffffff;
 }
 #services .glyphicon {
@@ -65,8 +65,9 @@ html, body {
   width: 140px;
 }
 
+
 #information {
-  background: url(../images/estate.jpg) no-repeat center center fixed; 
+  background: url(../images/desk2.jpg) no-repeat center center fixed; 
   display: table;
   height: 800px;
   position: relative;
