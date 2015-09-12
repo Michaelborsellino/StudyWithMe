@@ -34,6 +34,10 @@ html, body {
 }
 
 /* additional sections */
+#littleicon {
+  font-size:200px;
+  margin-left:200px;
+}
 #home {
   background: url(../images/desk.gif) no-repeat center center fixed; 
   display: table;
@@ -62,7 +66,7 @@ body.home .site-description {
 }
 
 #services {
-  background-color: #D6E8E8;
+  background-color: #A02A2A;
   color: #ffffff;
 }
 #services .glyphicon {

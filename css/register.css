@@ -34,7 +34,7 @@ html, body {
 
 /* additional sections */
 #home {
-  background-color: #fcfcff; no-repeat center center fixed; 
+  background: url(../images/bricks.jpg); repeat, fixed;
   display: table;
   height: 100%;
   position: relative;
@@ -121,14 +121,14 @@ html, body {
   font-size:110%;
 }
 .darkGrey{
-  color:#47525d;
+  color:#FFF;
 }
 
 .blueLink {
-  color:#427fed;
+  color:#DE5C5C;
 }
 .blueLink:hover{
-  color:#427fed;
+  color:#A02A2A;
   text-decoration: underline;
 }
 
