@@ -65,6 +65,22 @@ html, body {
   width: 140px;
 }
 
+#social {
+  background-color: #D6E8E8;
+  color: #ffffff;
+  text-align: center;
+}
+
+#social .fa {
+  display: inline-block;
+  font-size: 30px;
+  height: 10px;
+  line-height: 10px;
+  position: center;
+  vertical-align: middle;
+  width: 140px;
+}
+
 
 #information {
   background: url(../images/desk2.jpg) no-repeat center center fixed; 
@@ -79,10 +95,6 @@ html, body {
 }
 #information .panel {
   opacity: 0.85;
-}
-
-#google_map {
-  height: 500px;
 }
 
 footer {
