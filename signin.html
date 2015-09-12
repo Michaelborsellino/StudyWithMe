@@ -10,9 +10,10 @@
     <!-- attach CSS styles -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet" />
+    <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
 
      <!-- liveReload - So developers dont have to hit the refresh button. Delete in production version -->
-  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+  <!--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>-->
   </head>
 
   <body>
@@ -55,11 +56,11 @@
         <div class="signin-card">
           <form class="form-signin" action="demo_sign_me_in.php" method="post">
             <i class="glyphicon glyphicon-user signin-icon"></i>
-            <input type="text" placeholder="Username" class="form-control">
+            <input type="text" id = "usn" placeholder="Email" class="form-control">
             <br/>
-            <input type="password" placeholder="Password" class="form-control">
+            <input type="password" id = "pwd" placeholder="Password" class="form-control">
             <br />
-            <button type="button" class="btn btn-primary form-control">Sign In</button>
+            <button type="button" onclick="validate()" class="btn btn-primary form-control">Sign In</button>
             <br />
             <br />
             <small style="float:right;"><a style="text-align:right;" class="blueLink" href="#">Need help?</a></small>
@@ -84,4 +85,21 @@
     <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
   </body>
+  <script>
+    function validate(){
+      var usn = document.getElementById("usn").value;
+      var pwd = document.getElementById("pwd").value;
+      var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
+      ref.authWithPassword({
+        email    : usn,
+        password : pwd
+      }, function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        console.log("Authenticated successfully with payload:", authData);
+      }
+      });
+    }
+  </script>
 </html>
