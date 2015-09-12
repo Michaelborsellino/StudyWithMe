@@ -35,7 +35,7 @@ html, body {
 
 /* additional sections */
 #home {
-  background: url(../images/desk.jpg) no-repeat center center fixed; 
+  background: url(../images/desk.gif) no-repeat center center fixed; 
   display: table;
   height: 100%;
   position: relative;
@@ -83,7 +83,7 @@ html, body {
 
 
 #information {
-  background: url(../images/desk2.jpg) no-repeat center center fixed; 
+  background: url(../images/desk2.gif) no-repeat center center fixed; 
   display: table;
   height: 800px;
   position: relative;
