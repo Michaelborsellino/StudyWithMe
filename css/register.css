@@ -162,3 +162,8 @@ footer .glyphicon {
 footer .glyphicon:hover {
   color: #306d9f;
 }
+
+body {
+/* the following line fixes a blink in chrome https://code.google.com/p/chromium/issues/detail?id=108025 */
+  -webkit-backface-visibility: hidden;
+}
