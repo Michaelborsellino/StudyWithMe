@@ -10,6 +10,9 @@
     <!-- attach CSS styles -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet" />
+
+     <!-- liveReload - So developers dont have to hit the refresh button. Delete in production version -->
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
   </head>
 
   <body>
@@ -24,7 +27,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Study With Me</a>
+          <a class="navbar-brand" href="/">Study With Me</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse-main">
@@ -40,12 +43,28 @@
 
     <!-- first section - Home -->
     <div id="home" class="home">
+      
+    <br>
+    <br>
+    <br>
+
+
       <div class="text-vcenter">
-        <div class="form-group">
-          <input type="text" placeholder="Username" class="form-control">
-        </div>
-        <div class="form-group">
-          <input type="password" placeholder="Password" class="form-control">
+        
+        <h2 class="darkGrey">Please sign in</h2>
+        <div class="signin-card">
+          <form class="form-signin" action="demo_sign_me_in.php" method="post">
+            <i class="glyphicon glyphicon-user signin-icon"></i>
+            <input type="text" placeholder="Username" class="form-control">
+            <br/>
+            <input type="password" placeholder="Password" class="form-control">
+            <br />
+            <button type="button" class="btn btn-primary form-control">Sign In</button>
+            <br />
+            <br />
+            <small style="float:right;"><a style="text-align:right;" class="blueLink" href="#">Need help?</a></small>
+            <span style="clear:both;"></span>
+          </form>
         </div>
       </div>
     </div>

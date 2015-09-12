@@ -22,7 +22,6 @@ html, body {
 
 /* vertical-centered text */
 .text-vcenter {
-  display: table-cell;
   text-align: center;
   vertical-align: middle;
 }
@@ -35,7 +34,7 @@ html, body {
 
 /* additional sections */
 #home {
-  background-color:#777; no-repeat center center fixed; 
+  background-color: #fcfcff; no-repeat center center fixed; 
   display: table;
   height: 100%;
   position: relative;
@@ -86,6 +85,57 @@ html, body {
   width: 140px;
 }
 
+.signin-card{
+    height:270px;
+    max-width:350px;
+    padding:40px 40px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    margin:0 auto;
+    background-color:#f7f7f7;
+}
+
+.text-vcenter {
+  /*display: table-cell; //Commented out by nick*/
+  text-align: center;
+  vertical-align: middle;
+}
+.text-vcenter h1 {
+  font-size: 4.5em;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+
+.signin-icon {
+    padding: 17px 51px 20px 21px;
+    box-shadow: 1px 1px 1px #49D;
+    font-size:230%;
+    margin-bottom:20px;
+    border-radius:100px;
+}
+.signin-card input{
+  font-size:110%;
+}
+.darkGrey{
+  color:#47525d;
+}
+
+.blueLink {
+  color:#427fed;
+}
+.blueLink:hover{
+  color:#427fed;
+  text-decoration: underline;
+}
+
+.form-control{
+  width:95%;
+  margin:0 auto;
+}
 
 #information {
   background: url(../images/desk2.gif) no-repeat center center fixed; 

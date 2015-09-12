@@ -46,6 +46,13 @@ html, body {
   background-size: cover;
 }
 
+/* Title and Slogan on homepage */
+body.home .site-title, 
+body.home .site-description {
+  color: #FFF; /* White */
+  text-shadow: 2px 2px 2px #222;
+}
+
 #about {
 }
 
