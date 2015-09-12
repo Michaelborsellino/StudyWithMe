@@ -20,14 +20,34 @@
   <body>
   <h1> Firebase Test </h1>
 
-  <div id='messagesDiv'></div>
+  <div style="float:left;" id='messagesDiv'></div>
   <br>
+  
+
+   <aside style="width:33%; float:right;">
+	<h3>Notify Me!</h3>
+	<button id="requestPermission">Request Permission</button>
+	<button id="checkPermission">Check Permission</button>
+	<div>
+	Permission: <span id="result">-</span>
+	</div>
+  
+  </aside>
+  <div style="clear:both;"></div>
   <input class="form-control" type='text' id='nameInput' placeholder='Name'>
   <br><br>
   <input class="form-control" type='text' id='messageInput' placeholder='Message'>
   <br>
-
+  <input type="hidden" content="New Message - Study With Me" id="hiddenNotificationTitle">
+  <input type="hidden" content="Study" id="hiddenNotificationTag">
+  <input type="hidden" content="http://static.tvtropes.org/pmwiki/pub/images/FIRE.png" id="hiddenIconTag">
+  
+ 
   <script>
+
+
+
+
   	var myDataRef = new Firebase('https://i927yr7wq0q.firebaseio-demo.com/');
   	$('#messageInput').keypress(function (e) {
   		if (e.keyCode == 13 ) { //enter key
@@ -52,6 +72,39 @@
         $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
         $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
       };
+
+
+      // Allow Browser Notifications
+      $(function() {
+		  if (window.Notification) {
+		    $("#requestPermission").on("click", function() {
+		      return Notification.requestPermission();
+		    });
+		    $("#checkPermission").on("click", function() {
+		      if (Notification.permission) {
+		        return $("#result").text(Notification.permission);
+		      } else {
+		        return $("#result").text((new Notification("check")).permission);
+		      }
+		    });
+		    return $("#show").on("click", function() {
+		      var notification;
+		      notification = new Notification(name, {
+		        tag: $("#hiddenNotificationTag").val(),
+		        body: text,
+		        iconUrl: $("#hiddenNotificationIcon").val(),
+		        icon: $("#hiddenNotificationIcon").val()
+		      });
+		      return notification.onclick = function() {
+		        notification.close();
+		        window.open().close();
+		        return window.focus();
+		      };
+		    });
+		  }
+		});
+
+
   </script>
   </body>
 </html>
