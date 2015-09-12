@@ -23,8 +23,8 @@ myDataRef.on('child_added', function(snapshot) {
 		      };
       });*/
  function displayChatMessage(name, text) {
-        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-        $('#chatter')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#chatter'));
+        $('#chatter')[0].scrollTop = $('#chatter')[0].scrollHeight;
       };
 
 </script>
