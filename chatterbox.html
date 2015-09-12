@@ -4,7 +4,7 @@ var myDataRef = new Firebase('https://vivid-torch-1590.firebaseIO.com/');
 
 myDataRef.on('child_added', function(snapshot) {
         var message = snapshot.val();
-        displayChatMessage(message.name, message.text);
+        displayChatMessage(message.from, message.body);
         
         /*
         //Popup notifications
@@ -23,7 +23,7 @@ myDataRef.on('child_added', function(snapshot) {
 		      */
       });
  function displayChatMessage(name, text) {
-        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#chatter'));
+        $('<div/>').text(body).prepend($('<em/>').text(from+': ')).appendTo($('#chatter'));
         $('#chatterBox')[0].scrollTop = $('#chatterBox')[0].scrollHeight;
       };
 
