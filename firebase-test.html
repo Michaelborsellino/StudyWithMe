@@ -2,8 +2,38 @@
 
 <html>
   <head>
+	
+  <!-- Firebase-->
 	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	
+	<!-- jQuery -->
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+
+	<!-- liveReload - So developers dont have to hit the refresh button -->
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+
+	<link rel="stylesheet" href="css/todc-bootstrap-theme.min.css">
+
+	var myDataRef = new Firebase('https://i927yr7wq0q.firebaseio-demo.com/');
   </head>
   <body>
+
+  <input type='text' id='nameInput' placeholder='Name'>
+  <br>
+  <input type='text' id='messageInput' placeholder='Message'>
+  <br>
+
+  <script>
+  	var myDataRef = new Firebase('https://i927yr7wq0q.firebaseio-demo.com/');
+  	$('#messageInput').keypress(function (e)) {
+  		if (e.keyCode == 13 ) { //enter key
+
+  			var name = $('#nameInput').val();
+          	var text = $('#messageInput').val();
+  			$('#messageInput').val('');
+  		}
+  	}
+  </script>
   </body>
 </html>
