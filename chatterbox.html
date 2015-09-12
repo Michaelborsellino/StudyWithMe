@@ -1,5 +1,4 @@
 <!-- Include this file on any page you wish to see a chatter box.-->
-<h1>hello</h1>
 <script>
 var myDataRef = new Firebase('https://vivid-torch-1590.firebaseIO.com/');
 
@@ -28,4 +27,8 @@ myDataRef.on('child_added', function(snapshot) {
         $('#chatterBox')[0].scrollTop = $('#chatterBox')[0].scrollHeight;
       };
 
+$(document).ready(function(){
+    $('#chatterBox').animate({
+        scrollTop: $('#chatterBox')[0].scrollHeight}, 2000);
+});
 </script>

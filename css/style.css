@@ -53,6 +53,11 @@ body.home .site-description {
   text-shadow: 2px 2px 2px #222;
 }
 
+#chatterBox{
+  max-height:500px;
+  overflow-y:scroll;
+}
+
 #about {
 }
 
