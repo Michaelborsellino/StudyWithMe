@@ -60,18 +60,7 @@
 
   			$('#messageInput').val('');
 
-  			var notification;
-		      notification = new Notification(name, {
-		        tag: $("#hiddenNotificationTag").val(),
-		        body: text,
-		        iconUrl: $("#hiddenNotificationIcon").val(),
-		        icon: $("#hiddenNotificationIcon").val()
-		      });
-		      return notification.onclick = function() {
-		        notification.close();
-		        window.open().close();
-		        return window.focus();
-		      };
+  			
   		}
   	});
 
@@ -80,6 +69,18 @@
   	myDataRef.on('child_added', function(snapshot) {
         var message = snapshot.val();
         displayChatMessage(message.name, message.text);
+        var notification;
+		      notification = new Notification(message.name, {
+		        tag: $("#hiddenNotificationTag").val(),
+		        body: message.text,
+		        iconUrl: $("#hiddenNotificationIcon").val(),
+		        icon: $("#hiddenNotificationIcon").val()
+		      });
+		      return notification.onclick = function() {
+		        notification.close();
+		        window.open().close();
+		        return window.focus();
+		      };
       });
       function displayChatMessage(name, text) {
         $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
