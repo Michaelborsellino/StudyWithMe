@@ -34,7 +34,7 @@ html, body {
 
 /* additional sections */
 #home {
-  background: url(../images/slab.jpg); repeat, fixed;
+  background: url(../images/bricks.jpg); repeat, fixed;
   display: table;
   height: 100%;
   position: relative;
@@ -86,7 +86,7 @@ html, body {
 }
 
 .signin-card{
-    min-height: 450px;
+    min-height: 100px;
     max-width:350px;
     padding:40px 40px;
     border-radius: 2px;
@@ -121,9 +121,13 @@ html, body {
   font-size:110%;
 }
 
-.addCourse {
-  text-decoration: none;
+a {
   color:#DE5C5C;
+}
+
+a:hover {
+  color:#A02A2A;
+  text-decoration: underline;
 }
 
 .darkGrey{
