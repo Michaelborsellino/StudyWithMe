@@ -122,7 +122,7 @@
 
      <script>
        var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
-
+       var authData = ref.getAuth();
         //$snapshot.val().firstname
       function isUserLoggedIn(authData) {
       //Previously called authDataCallback by Firebase Docs https://www.firebase.com/docs/web/guide/user-auth.html
@@ -189,7 +189,129 @@
     function disconnect(){
       ref.unauth();
     }       
+var globalarray = new Array(Array());
+    var existingval2 = new Array();
 
+    function grabstuff(){
+      var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
+      var grabusers =ref.child("/users");
+      grabusers.once("value", 
+        function(snap){
+         // console.log(snap.val());
+          snap.forEach(function(childsnap){
+            var currentkey = childsnap.key();
+            if(currentkey !=authData.uid){
+            var grabcourses = grabusers.child("/"+currentkey+"/courses");
+            var grabfirst = grabusers.child("/"+currentkey+"/firstname");
+            var grablast = grabusers.child("/"+currentkey+"/lastname");
+            var existingval = new Array();
+            grabfirst.once("value",
+              function(snap2){
+                //console.log(snap2.val());
+                var data = snap2.val();
+                existingval.push(data.toString());
+                  //console.log(existingval);
+                
+              });
+            grablast.once("value",
+              function(snap2){
+                //console.log(snap2.val());
+                var data = snap2.val();
+                existingval.push(data.toString());
+                  //console.log(existingval);
+                
+              });
+            grabcourses.once("value",
+              function(snap2){
+                //console.log(snap2.val());
+                snap2.forEach(function(doublesnaps){
+                  var data = doublesnaps.val();
+                  existingval.push(data.toString());
+                  //console.log(existingval);
+                });
+              });
+            globalarray.push(existingval);
+          }
+            
+            
+          });
+        });
+      //console.log(globalarray);
+    } 
+    function holyshit(){
+      
+      var ref2 = new Firebase("https://vivid-torch-1590.firebaseio.com/users/"+authData.uid+"/courses");
+      
+      ref2.once("value", 
+        function(snap){
+          //console.log(snap.val());
+          snap.forEach(function(childsnap){
+           var data = childsnap.val();
+           existingval2.push(data.toString());
+          
+          });
+          //console.log(existingval2);
+        });
+      
+    }
+    grabstuff();
+    holyshit();
+    
+    var matches = new Array(Array());
+    function findMatches(){
+      
+      for(var x = 0; x < existingval2.length; x++)
+      {
+        for(var y = 1; y < globalarray.length; y++)
+        {
+          for(var z = 2; z < globalarray[y].length; z++)
+          {
+            if(existingval2[x].toLowerCase() == globalarray[y][z].toLowerCase())
+            {
+              var temp = globalarray[y][0].toString() + ' '+globalarray[y][1].toString();
+              var index = matches.indexOf(temp);
+              if(index < 0){
+                matches.push('x');
+                matches.push(temp);
+                matches.push(existingval2[x]);
+              }
+              else
+                matches.splice(index+1, 0, existingval2[x])
+                
+                
+              }
+            }
+          }
+        }
+      }
+    function populatelist(){
+      var id = 0;
+      for(var x = 0; x < matches.length; ++x)
+      {
+        if( matches[x] == 'x'){
+         
+         var d = x+1;
+         for(; d < matches.length; ++d)
+         {
+          if(matches[d] != 'x')
+            continue;
+          else
+            break;
+         }
+         var newarray = matches.slice(x+2,d);
+         var stringify = newarray.toString();
+         document.getElementById("userMatches").innerHTML = '<div class = "row"><h3>'+matches[x+1]+'</h3><h2>'+stringify+'</h2></div>';
+         x = d-1;
+        }
+      }
+    }
+    setTimeout(function(){
+      console.log(existingval2);
+      console.log(globalarray);
+      findMatches();
+      populatelist();
+      console.log(matches);
+    },2000);
       </script>
   </body>
 
