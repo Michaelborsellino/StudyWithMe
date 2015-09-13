@@ -146,9 +146,11 @@ i {
   margin: 0;
   padding: 0;
 }
-
-
-
+/* #chatterBox{
+  border: 1px solid #333;
+  border-radius: 6px;
+  box-shadow: 2px 3px 1px #999;
+}*/
 
 .signin-icon {
     padding: 17px 51px 20px 21px;
