@@ -77,16 +77,8 @@
             </div>
             
             <div class="col-md-5">
-              <div id="chatterBox" class="panel-body">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h2 class="panel-title">Chat Box</h2>
-                    </div>
-                    <div id="chatterBox" class="panel-body">
-                      <div id="chatter"></div>
-                      <input style="margin-top:8px" class="form-control" type='text' id='messageInput' placeholder='Type here then press enter'>
-                    </div>
-                </div>
+              <div id="firechat-wrapper">
+               
                 <!-- Include this file on any page you wish to see a chatter box.-->
                 <span id="nameholder" style="display:none;"></span>
               </div>
@@ -209,6 +201,7 @@ var globalarray = new Array(Array());
             var grabfirst = grabusers.child("/"+currentkey+"/firstname");
             var grablast = grabusers.child("/"+currentkey+"/lastname");
             var existingval = new Array();
+            existingval.push(currentkey.toString());
             grabfirst.once("value",
               function(snap2){
                 //console.log(snap2.val());
@@ -268,13 +261,15 @@ var globalarray = new Array(Array());
       {
         for(var y = 1; y < globalarray.length; y++)
         {
-          for(var z = 2; z < globalarray[y].length; z++)
+          for(var z = 3; z < globalarray[y].length; z++)
           {
             if(existingval2[x].toLowerCase() == globalarray[y][z].toLowerCase())
             {
-              var temp = globalarray[y][0].toString() + ' '+globalarray[y][1].toString();
+              var temp = globalarray[y][1].toString() + ' '+globalarray[y][2].toString();
               var index = matches.indexOf(temp);
               if(index < 0){
+                matches.push('c');
+                matches.push(globalarray[y][0])
                 matches.push('x');
                 matches.push(temp);
                 matches.push(existingval2[x]);
@@ -289,43 +284,67 @@ var globalarray = new Array(Array());
         }
       }
 
-      var chatRef = new Firebase('https://vivid-torch-1590.firebaseio.com/chat');
-      chatRef.onAuth(function(authData) {
-        // Once authenticated, instantiate Firechat with our user id and user name
-        if (authData) {
-          var chat = new FirechatUI(chatRef, document.getElementById('firechat-wrapper'));
-          chat.setUser(authData.uid, authData[authData.provider].displayName);
-        }
-      });
-      function login(provider) {
-        chatRef.authWithOAuthPopup(provider, function(error, authData) {
-          if (error) {
-            console.log(error);
-          }
-        });
-      }
+      
+      
     function populatelist(){
-      var id = 0;
+      var id;
       for(var x = 0; x < matches.length; ++x)
       {
+        if (matches[x] == 'c'){
+          id = matches[x+1];
+          x+=1;
+          continue;
+        }
         if( matches[x] == 'x'){
          
          var d = x+1;
          for(; d < matches.length; ++d)
          {
-          if(matches[d] != 'x')
+          if(matches[d] != 'c')
             continue;
-          else
+          else{
+            console.log(id);
             break;
+          }
          }
          var newarray = matches.slice(x+2,d);
          var stringify = newarray.toString();
-         document.getElementById("userMatches").insertAdjacentHTML('beforeend','<div class = "sillywilly"><h3>'+matches[x+1]+'</h3><h2>'+stringify+'</h2><button onclick="startchat()">Chat</button></div>');
+         document.getElementById("userMatches").insertAdjacentHTML('beforeend','<div class = "sillywilly"><h3>'+matches[x+1]+'</h3><h2>'+stringify+'</h2><button value='+id+' onclick="startchat(this.value)">Chat</button></div>');
          x = d-1;
         }
       }
       var newstring = existingval2.toString();
       document.getElementById("userCourses").insertAdjacentHTML('beforeend','<div class = "sillywilly2"><p>Courses You\'re In: '+newstring+'</p></div>');
+    }
+    function startchat(value){
+      console.log(value);
+     var chatRef = new Firebase('https://vivid-torch-1590.firebaseio.com/chat');
+      chatRef.onAuth(function(authData) {
+        // Once authenticated, instantiate Firechat with our user id and user name
+        if (authData) {
+          console.log(authData)
+          var chat = new FirechatUI(chatRef, document.getElementById('firechat-wrapper'));
+          var fireChat = chat._chat;
+          var usersRef = new Firebase('https://vivid-torch-1590.firebaseio.com/users/' + authData.uid);
+          usersRef.once('value', function(snap) {
+            var user = snap.val();
+            fireChat.setUser(authData.uid, user.firstname + ' '+ user.lastname, function(user){
+              fireChat.resumeSession();
+              fireChat.createRoom("StudyChat","private", function(roomId) {
+                console.log(roomId,fireChat._userId,fireChat._sessionId);
+            console.log(fireChat);
+            fireChat.inviteUser(value, roomId);
+            fireChat.enterRoom(roomId);
+          });
+
+            });
+
+          });
+         
+          
+          
+        }
+      });
     }
     setTimeout(function(){
       console.log(existingval2);
