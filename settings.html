@@ -60,7 +60,7 @@
             <form method="POST">
             <div id="dynamicInput">
             Your Courses This Semester
-            <br><input type="text" name="myInputs" placeholder="Course 1" class="form-control">
+            <br><input type="text" name="myInputs" placeholder="Course 1" class="form-control" required>
             </div>
             <a href="#!" class="addCourse" onClick="addInput('dynamicInput');"><i class="fa fa-plus" style="font-size: 11px"></i> Add Another Course</a>
             </form>
@@ -108,15 +108,20 @@
     var chilluns;
     var addstuffs = ref.child("/users/"+authData.uid+"/courses");
     var coursenums = document.getElementsByName("myInputs");
-    console.log(coursenums[0].value);
+    //console.log(coursenums[0].value);
+    setTimeout(function(){
+      window.location = "profile.html";
+    },2000);
+
+  
+
     for (var i = 0; i < coursenums.length; i++)
     {
-      ref.once("value",function(snapshot){
-        chilluns = snapshot.numchildren();
-      });
-    console.log(chilluns);
+      
       addstuffs.push(coursenums[i].value);
     }
+
+    
   }
 </script>
 </html>
