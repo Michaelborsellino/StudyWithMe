@@ -56,10 +56,17 @@
         <h2 class="darkGrey">Create a New Account</h2>
         <div class="signin-card">
           <form class="form-signin" method="post">
-            <input type="text" id= "usn" placeholder="Email" class="form-control">
-            <br/>
-            <input type="password" id ="pwd" placeholder="Password" class="form-control">
-            <br />
+            
+            <div class="field--wrapper">
+              <label for="email">Email</label>
+              <input type="text" id= "usn" placeholder="Email" class="form-control">
+            </div>
+            
+            <div class="field--wrapper">
+              <label for="password">password</label>
+              <input type="password" id ="pwd" placeholder="Password" class="form-control">
+            </div>
+            
             <button type="button" onclick="validate()" class="btn btn-primary form-control">Sign Up For Free</button>
             <br />
             <br />
@@ -67,31 +74,32 @@
             <span style="clear:both;"></span>
           </form>
           
+          </div>
         </div>
       </div>
-    </div>
 
 
-    </div>
-    <!-- /first section -->
-
-    <!-- footer -->
-    <footer>
-      <div class="container">
-        <p class="text-center">Copyright &copy; Study With Me | 2015</p>
       </div>
-    </footer>
-    <!-- /footer -->
+      <!-- /first section -->
 
-    <!-- attach JavaScripts -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
-    <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
+      <!-- footer -->
+      <footer>
+        <div class="container">
+          <p class="text-center">Copyright &copy; Study With Me | 2015</p>
+        </div>
+      </footer>
+      <!-- /footer -->
+
+      <!-- attach JavaScripts -->
+      <script src="js/jquery-1.10.2.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
+      <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
   </body>
 
 <script>
   
+
  var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
   var isNewUser = true;
   function getName(authData) {
@@ -149,7 +157,25 @@
 });
   }
 
-
+  $(function float_label_form(){
+      var onClass = "on";
+      var showClass = "show";
+      
+      $("input").bind("checkval",function(){
+        var label = $(this).prev("label");
+        if(this.value !== ""){
+          label.addClass(showClass);
+        } else {
+          label.removeClass(showClass);
+        }
+      }).on("keyup",function(){
+        $(this).trigger("checkval");
+      }).on("focus",function(){
+        $(this).prev("label").addClass(onClass);
+      }).on("blur",function(){
+          $(this).prev("label").removeClass(onClass);
+      }).trigger("checkval");
+    });
 
 </script>
 </html>

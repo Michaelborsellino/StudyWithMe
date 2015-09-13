@@ -164,7 +164,7 @@ body {
 label {
   position:absolute;
   top:-13px;
-  left:0;
+  left:8px;
   font-size:11px;
   color:#aaa;
   transition: all 0.1s linear;
@@ -172,7 +172,7 @@ label {
   font-weight:bold;
 }
 label.on {
-  color:#4481C4;
+  color:#DE5C5C;  
 }
 label.show {
   top:-15px;
