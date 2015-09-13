@@ -68,7 +68,7 @@
             <div id="dynamicInput">
             <hr>
             Your Courses This Semester
-            <br><input type="text" name="myInputs[]" placeholder="Course 1" class="form-control">
+            <br><input type="text" name="myInputs" placeholder="Course 1" class="form-control">
             </div>
             <a href="#!" class="addCourse" onClick="addInput('dynamicInput');"><i class="fa fa-plus" style="font-size: 11px"></i> Add Another Course</a>
             </form>
@@ -105,23 +105,15 @@
 
 <script>
   
-  var myFirebaseRef = new Firebase("https://vivid-torch-1590.firebaseio.com");
-
+  var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
+  var authData = ref.getAuth();
+  console.log(authData.uid);
   function validate(){
-    var usn = document.getElementById("usn").value;
-    var pwd = document.getElementById("pwd").value;
-    var ref = new Firebase("https://vivid-torch-1590.firebaseio.com")
-    
-    ref.createUser({
-      email    : usn,
-      password : pwd
-    }, function(error, userData) {
-    if (error) {
-      console.log("Error creating user:", error);
-    } else {
-      console.log("Successfully created user account with uid:", userData.uid);
-    }
-  });
+    var addstuffs = ref.child("/users/"+authData.uid+"/courses");
+    var coursenums = document.getElementsByName("myInputs");
+    console.log(coursenums[0].value);
+    for (var i = 0; i < coursenums.length; i++)
+      addstuffs.push(coursenums[i].value);
   }
 </script>
 </html>
