@@ -300,10 +300,12 @@ var globalarray = new Array(Array());
          }
          var newarray = matches.slice(x+2,d);
          var stringify = newarray.toString();
-         document.getElementById("userMatches").innerHTML = '<div class = "row"><h3>'+matches[x+1]+'</h3><h2>'+stringify+'</h2></div>';
+         document.getElementById("userMatches").insertAdjacentHTML('beforeend','<div class = "row"><h3>'+matches[x+1]+'</h3><h2>'+stringify+'</h2></div>');
          x = d-1;
         }
       }
+      var newstring = existingval2.toString();
+      document.getElementById("userCourses").insertAdjacentHTML('beforeend','<div class = "row2"><p>Courses You\'re In: '+newstring+'</p></div>');
     }
     setTimeout(function(){
       console.log(existingval2);
