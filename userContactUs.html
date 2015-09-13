@@ -30,7 +30,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="profile.html">Welcome, User!</a>
+          <a class="navbar-brand" href="profile.html">Welcome, <span class="fname">User</span>!</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse-main">
@@ -114,6 +114,29 @@
       console.log("Successfully created user account with uid:", userData.uid);
     }
   });
+  }
+ var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
+
+      //$snapshot.val().firstname
+    function isUserLoggedIn(authData) {
+    //Previously called authDataCallback by Firebase Docs https://www.firebase.com/docs/web/guide/user-auth.html
+    if (authData) {
+      //console.log('AUTH-ED', "https://vivid-torch-1590.firebaseio.com/users/" + authData.uid, authData);
+      // console.log("User " + authData.uid + " is logged in with " + authData.provider);
+    var profileRef = new Firebase("https://vivid-torch-1590.firebaseio.com/users/" + authData.uid);
+    profileRef.once('value', function(snapshot) {
+      $(".fname").text(snapshot.val().firstname);
+      $(".lname").text(snapshot.val().lastname);
+    });
+         // console.log(dump(authData));
+    } else {
+      console.log("User is logged out");
+    }
+  }
+  
+  ref.onAuth(isUserLoggedIn);
+  function disconnect(){
+    ref.unauth();
   }
 </script>
 </html>
