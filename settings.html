@@ -113,9 +113,9 @@
     var addstuffs = ref.child("/users/"+authData.uid+"/courses");
     var coursenums = document.getElementsByName("myInputs");
     //console.log(coursenums[0].value);
-   /* setTimeout(function(){
+   setTimeout(function(){
       window.location = "profile.html";
-    },3000);*/
+    },3000);
     var existingval = new Array();
     ref2.once("value", 
       function(snap){
