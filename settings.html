@@ -30,7 +30,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">Study With Me</a>
+          <a class="navbar-brand" href="#">Study With Me</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse-main">
@@ -103,21 +103,26 @@
     <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
   </body>
 
-<<<<<<< HEAD
 <script>
   
   var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
   var authData = ref.getAuth();
+  var ref2 = new Firebase("https://vivid-torch-1590.firebaseio.com/users/"+authData.uid+"/courses");
   console.log(authData.uid);
   function validate(){
+    var chilluns;
     var addstuffs = ref.child("/users/"+authData.uid+"/courses");
     var coursenums = document.getElementsByName("myInputs");
     console.log(coursenums[0].value);
     for (var i = 0; i < coursenums.length; i++)
+    {
+      ref.once("value",function(snapshot){
+        chilluns = snapshot.numchildren();
+      });
+    console.log(chilluns);
       addstuffs.push(coursenums[i].value);
+    }
   }
 </script>
-=======
->>>>>>> 453b2b76ee3473d6728e82f722ec5f8275d27b12
 </html>
 
