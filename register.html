@@ -151,7 +151,11 @@
     // use them in Security and Firebase Rules, and show profiles
     ref.child("users").child(authData.uid).set({
       provider: authData.provider,
-      name: getName(authData)
+      name: getName(authData),
+      firstname:"",
+      lastname:"",
+      courses:{""
+      }
     });
   }
 });
