@@ -57,15 +57,21 @@
         <div class="signin-card">
           <form class="form-signin" method="post">
             <i class="glyphicon glyphicon-user signin-icon"></i>
-            <label for="username">username</label>
-            <input type="text" id="usn" placeholder="Email" class="form-control" name="username">
-            <br/>
-            <input type="password" id ="pwd" placeholder="Password" class="form-control" name="password">
-            <br />
+
+            <div class="field--wrapper">
+              <label for="email">Email</label>
+              <input type="text" id="usn" placeholder="Email" class="form-control" name="email">
+            </div>
+
+            <div class="field--wrapper">
+              <label for="password">password</label>
+              <input type="password" id ="pwd" placeholder="Password" class="form-control" name="password">
+            </div>
+            
             <button type="button" onclick="validate()" class="btn btn-primary form-control">Sign In</button>
             <br />
             <br />
-            <small style="float:right;"><a style="text-align:right;" class="blueLink" href="#">Need help?</a></small>
+            <small style="float:right;"><a style="text-align:right;" class="blueLink" href="need-help.html">Need help?</a></small>
             <span style="clear:both;"></span>
           </form>
         </div>
