@@ -37,7 +37,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="profile.html">My Profile</a></li>
             <li><a href="settings.html">Settings</a></li>
-            <li><a href="#">Sign Out</a></li>
+            <li><a href="index.html" onclick="disconnect()">Sign Out</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -104,23 +104,54 @@
   var authData = ref.getAuth();
   var ref2 = new Firebase("https://vivid-torch-1590.firebaseio.com/users/"+authData.uid+"/courses");
   console.log(authData.uid);
+
+  function disconnect(){
+    ref.unauth();
+  }
   function validate(){
     var chilluns;
     var addstuffs = ref.child("/users/"+authData.uid+"/courses");
     var coursenums = document.getElementsByName("myInputs");
     //console.log(coursenums[0].value);
-    setTimeout(function(){
+   /* setTimeout(function(){
       window.location = "profile.html";
-    },2000);
-
-  
-
+    },3000);*/
+    var existingval = new Array();
+    ref2.once("value", 
+      function(snap){
+        console.log(snap.val());
+        snap.forEach(function(childsnap){
+          var data = childsnap.val();
+          existingval.push(data.toString());
+          console.log(existingval);
+        });
+      });
+      /*
+        var flag = 0;
+        for(var x = 0; x < coursenums.length; ++x){
+          for(var i = 0; i < existingval.length; ++i){
+            if(coursenums[x].value.toString() === existingval[i].toString())
+              {
+                flag = 1;
+                break;
+              }
+            }
+          if (flag == 0)
+          {
+            addstuffs.push(coursenums[x].value);
+            console.log("Pushed");
+          }
+          else
+            flag = 0;
+        }*/
+      
+    
     for (var i = 0; i < coursenums.length; i++)
     {
       
-      addstuffs.push(coursenums[i].value);
+      addstuffs.push(coursenums[i].value.toString());
     }
-
+   
     
   }
 </script>
