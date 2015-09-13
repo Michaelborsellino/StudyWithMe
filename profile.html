@@ -5,14 +5,14 @@
   <!--<script>var Firebase = require("firebase");</script>-->
     <meta charset="utf-8" />
     <meta name="author" content="Script Tutorials" />
-    <title>Study With Me | Contact Us</title>
+    <title>Study With Me | My Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="shortcut icon" href="images/people.png" type="image">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <!-- attach CSS styles -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/contact.css" rel="stylesheet" />
+    <link href="css/profile.css" rel="stylesheet" />
 
        <!-- liveReload - So developers dont have to hit the refresh button. Delete in production version -->
   <!--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>-->
@@ -53,20 +53,34 @@
     <br>
        <div class="text-vcenter">
         
-        <h2 class="darkGrey">Have a Question? Shoot Us a Message!</h2>
+        <h2 class="darkGrey">Let's Get Your Profile Set Up!</h2>
         <div class="signin-card">
           <form class="form-signin" action="demo_sign_me_in.php" method="post">
-            <input type="name" id ="name" placeholder="Name" class="form-control">
+            About You
+            <input type="text" id ="name" placeholder="First Name" class="form-control">
             <br/>
-            <input type="text" id= "usn" placeholder="Email" class="form-control">
+            <input type="text" id= "name" placeholder="Last Name" class="form-control">
             <br />
-            <textarea rows="10" cols="40" placeholder = "Type Your Message Here!" class="form-control"></textarea>
+            <input type="text" id= "school" placeholder="Full Name of Your University" class="form-control">
             <br />
-            <button type="button" onclick="validate()" class="btn btn-primary form-control">Send</button>
+            <script src="js/addInput.js" language="Javascript" type="text/javascript"></script>
+            <form method="POST">
+            <div id="dynamicInput">
+            <hr>
+            Your Courses This Semester
+            <br><input type="text" name="myInputs[]" placeholder="Course 1" class="form-control">
+            </div>
+            <a href="#!" class="addCourse" onClick="addInput('dynamicInput');"><i class="fa fa-plus" style="font-size: 11px"></i> Add Another Course</a>
+            </form>
+            <br>
+            <button type="button" onclick="validate()" class="btn btn-primary form-control">Save Changes</button>
             <br />
             <span style="clear:both;"></span>
           </form>
         </div>
+        <br>
+        <br>
+        <br> 
       </div>
     </div>
 
@@ -89,26 +103,5 @@
     <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
   </body>
 
-<script>
-  
-  var myFirebaseRef = new Firebase("https://vivid-torch-1590.firebaseio.com");
-
-  function validate(){
-    var usn = document.getElementById("usn").value;
-    var pwd = document.getElementById("pwd").value;
-    var ref = new Firebase("https://vivid-torch-1590.firebaseio.com")
-    
-    ref.createUser({
-      email    : usn,
-      password : pwd
-    }, function(error, userData) {
-    if (error) {
-      console.log("Error creating user:", error);
-    } else {
-      console.log("Successfully created user account with uid:", userData.uid);
-    }
-  });
-  }
-</script>
 </html>
 
