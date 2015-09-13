@@ -37,7 +37,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="profile.html">My Profile</a></li>
             <li><a href="settings.html">Settings</a></li>
-            <li><a href="#">Sign Out</a></li>
+            <li><a href="index.html" onclick="disconnect()">Sign Out</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -114,6 +114,9 @@
     <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
     <script>
+
+
+
       $(function(){
         $("#chatter").load("includes/chatterbox.html"); 
       });
@@ -127,6 +130,10 @@
     }
     var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
     ref.onAuth(isUserLoggedIn);
+
+    function disconnect(){
+    ref.unauth();
+    }
     </script>
   </body>
 
