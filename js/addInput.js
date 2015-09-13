@@ -8,7 +8,7 @@ function addInput(divName){
           var newdiv = document.createElement('div');
           counter++;
           var placestring = 'Course '+ counter.toString();
-          newdiv.innerHTML =  '<br><input type="text" name="myInputs[]" class="form-control" placeholder="'+placestring+'">';
+          newdiv.innerHTML =  '<br><input type="text" name="myInputs" class="form-control" placeholder="'+placestring+'">';
           document.getElementById(divName).appendChild(newdiv);
      }
 }
