@@ -55,19 +55,25 @@
         <h2 class="darkGrey">Create a New Account</h2>
         <div class="signin-card">
           <form class="form-signin" method="post">
-            <input type="text" id ="first" placeholder="First Name" class="form-control">
-            <br/>
-            <input type="text" id= "last" placeholder="Last Name" class="form-control">
-            <br />
-            <input type="text" id= "school" placeholder="Full Name of Your University" class="form-control">
-            <br />
+            <div class="field--wrapper">
+              <label for="school">First Name</label>
+              <input type="text" id ="first" placeholder="First Name" class="form-control">
+            </div>          
+            <div class="field--wrapper">
+              <label for="last">Last Name</label>
+              <input type="text" id= "last" placeholder="Last Name" class="form-control">
+            </div>
+            <div class="field--wrapper">
+              <label for="school">Full Name of Your University</label>
+              <input type="text" id= "school" placeholder="Full Name of Your University" class="form-control">
+            </div>
             <div class="field--wrapper">
               <label for="email">Email</label>
               <input type="text" id= "usn" placeholder="Email" class="form-control">
             </div>
             
             <div class="field--wrapper">
-              <label for="password">password</label>
+              <label for="password">Password</label>
               <input type="password" id ="pwd" placeholder="Password" class="form-control">
             </div>
             
