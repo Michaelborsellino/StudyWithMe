@@ -65,10 +65,10 @@
           </div>
           <hr>
           <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
               &nbsp;
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
               <div id="chatterBox" class="panel-body">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -76,7 +76,7 @@
                     </div>
                     <div id="chatterBox" class="panel-body">
                       <div id="chatter"></div>
-                      <input class="form-control" type='text' id='messageInput' placeholder='Message'>
+                      <input style="margin-top:8px" class="form-control" type='text' id='messageInput' placeholder='Type here then press enter'>
                     </div>
                 </div>
                 <!-- Include this file on any page you wish to see a chatter box.-->
@@ -159,11 +159,13 @@
     myChild.on('child_added', function(snapshot) {
         var message = snapshot.val();
         displayChatMessage(message.name, message.text);
+
       });
 
+
       function displayChatMessage(name, text) {
-        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#chatterBox'));
-        $('#chatterBox')[0].scrollTop = $('#chatterBox')[0].scrollHeight;
+        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#chatter'));
+        $('#chatter')[0].scrollTop = $('#chatter')[0].scrollHeight;
       };
 
     /*$(document).ready(function(){
