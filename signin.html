@@ -38,6 +38,11 @@
             <li><a href="index.html#about">About</a></li>
             <li><a href="index.html#services">Services</a></li>
             <li><a href="contact.html">Contact Us</a></li>
+            <div class="media-left">
+              <a href="#">
+                <img class="media-object" src="..." alt="...">
+              </a>
+            </div>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -126,9 +131,21 @@
         console.log("Login Failed!", error);
       } else {
         console.log("Authenticated successfully with payload:", authData);
+        window.location.href = "settings.html";
       }
-      });
+      }); 
     }
+    function isUserLoggedIn(authData) {
+      //Previously called authDataCallback by Firebase Docs https://www.firebase.com/docs/web/guide/user-auth.html
+      if (authData) {
+        console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      } else {
+        console.log("User is logged out");
+      }
+    }
+    var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
+    ref.onAuth(isUserLoggedIn);
+
   </script>  
   </body>
   
