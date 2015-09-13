@@ -51,31 +51,31 @@
     <br>
     <br>
        <div class="text-vcenter">
-        
-        <h2 class="darkGrey">My Profile</h2>
         <div class="signin-card">
-          <form class="form-signin" action="demo_sign_me_in.php" method="post">
-            About You
-            <input type="text" id ="name" placeholder="First Name" class="form-control">
-            <br/>
-            <input type="text" id= "name" placeholder="Last Name" class="form-control">
-            <br />
-            <input type="text" id= "school" placeholder="Full Name of Your University" class="form-control">
-            <br />
-            <script src="js/addInput.js" language="Javascript" type="text/javascript"></script>
-            <form method="POST">
-            <div id="dynamicInput">
-            <hr>
-            Your Courses This Semester
-            <br><input type="text" name="myInputs[]" placeholder="Course 1" class="form-control">
+          <div class="row">
+            <div class="col-m-3">
+              <i id="userImg" class="fa fa-user"></i>
             </div>
-            <a href="#!" class="addCourse" onClick="addInput('dynamicInput');"><i class="fa fa-plus" style="font-size: 11px"></i> Add Another Course</a>
-            </form>
+            <div class="col-sm-4">
+              <p class="name">John Doe</p>
+              <p class="info">Florida State University</p>
+              <p class="info">Tallahassee, FL</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+            &nbsp;</div>
+            <div class="col-md-4">
+              <div id="chatterBox" class="panel-body lead">
+                <div id="chatter"></div>
+              </div>
+            </div>
+          </div>
             <br>
-            <button type="button" onclick="validate()" class="btn btn-primary form-control">Save Changes</button>
-            <br />
-            <span style="clear:both;"></span>
-          </form>
+            <br>
+            <br>
+            <br>
+            <hr>
         </div>
         <br>
         <br>
@@ -103,6 +103,11 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
+    <script>
+      $(function(){
+        $("#chatter").load("includes/chatterbox.html"); 
+      });
+    </script>
   </body>
 
 </html>

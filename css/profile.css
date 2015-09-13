@@ -45,6 +45,12 @@ html, body {
   background-size: cover;
 }
 
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 2px solid #eee;
+}
 
 #services {
   background-color: #D6E8E8;
@@ -78,8 +84,47 @@ html, body {
   width: 140px;
 }
 
+#userImg {
+  float: left;
+  margin-left: 30px;
+  font-size: 70px;
+}
+
+.userInfo {
+  position: left;
+}
+
+i {
+    margin-top: -25px;
+    padding: 20px 25px;
+    display: inline-block;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    -moz-box-shadow: 0px 0px 2px #888;
+    -webkit-box-shadow: 0px 0px 2px #888;
+    box-shadow: 0px 0px 2px #888;
+}
+
+.name {
+  margin-right: 80px;
+  margin-top: -5px;
+  text-align: left;
+  font-family: Montserrat;
+  font-size: 20px;
+}
+
+.info {
+  margin-right: 80px;
+  margin-top: -5px;
+  text-align: left;
+  font-family: Montserrat;
+  font-size: 12px;
+  vertical-align: center;
+}
+
 .signin-card{
-    min-height: 450px;
+    min-height: 550px;
     max-width:85%;
     padding:40px 40px;
     border-radius: 2px;
@@ -101,6 +146,8 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+
 
 
 .signin-icon {
