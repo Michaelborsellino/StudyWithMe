@@ -57,7 +57,7 @@
               <i id="userImg" class="fa fa-user"></i>
             </div>
             <div class="col-sm-4">
-              <p class="name"><span class="fname"></span> <span class="lname"></span></p>
+              <p class="name"><span id="ffname" class="fname"></span> <span class="lname"></span></p>
               <p class="info">Florida State University</p>
               
               
@@ -146,7 +146,7 @@
     messageField.keypress(function (e) {
       if (e.keyCode == 13) {
         //FIELD VALUES  
-        var username = $(".fname").text();
+        var username = $("#ffname").text();
         var message = messageField.val();
 
         //SAVE DATA TO FIREBASE AND EMPTY FIELD
