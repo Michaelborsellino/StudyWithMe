@@ -45,13 +45,7 @@ html, body {
   background-size: cover;
 }
 
-#login {
-  height: 100%;
-  width: 100%;
-}
 
-#about {
-}
 
 #services {
   background-color: #D6E8E8;
@@ -86,7 +80,6 @@ html, body {
 }
 
 .signin-card{
-    min-height: 450px;
     max-width:350px;
     padding:40px 40px;
     border-radius: 2px;

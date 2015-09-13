@@ -62,6 +62,14 @@ body.home .site-description {
   overflow-y:scroll;
 }
 
+.blueLink {
+  color:#DE5C5C;
+}
+.blueLink:hover{
+  color:#A02A2A;
+  text-decoration: underline;
+}
+
 #about {
 }
 
