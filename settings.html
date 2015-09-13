@@ -109,18 +109,28 @@
     var addstuffs = ref.child("/users/"+authData.uid+"/courses");
     var coursenums = document.getElementsByName("myInputs");
     //console.log(coursenums[0].value);
-    setTimeout(function(){
+    /*setTimeout(function(){
       window.location = "profile.html";
-    },2000);
-
-  
-
+    },2000);*/
+    var existingval = new Array();
+    ref2.once("value", function(snap){
+      console.log(snap.val());
+      snap.forEach(function(childsnap){
+        console.log(childsnap.val());
+        var data = childsnap.val();
+        existingval.push(data);
+      });
+    });
+    
     for (var i = 0; i < coursenums.length; i++)
     {
       
       addstuffs.push(coursenums[i].value);
     }
-
+   
+setTimeout(function(){
+       console.log(existingval);
+    },2000);
     
   }
 </script>
