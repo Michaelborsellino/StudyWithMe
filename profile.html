@@ -80,58 +80,7 @@
                     </div>
                 </div>
                 <!-- Include this file on any page you wish to see a chatter box.-->
-              <script>
-              var myDataRef = new Firebase('https://vivid-torch-1590.firebaseIO.com/');
-
-              myDataRef.on('child_added', function(snapshot) {
-                      var message = snapshot.val();
-                      displayChatMessage(message.name, message.text);
-                      
-                      /*
-                      //Popup notifications
-                      var notification;
-                        notification = new Notification(message.name, {
-                          tag: $("#hiddenNotificationTag").val(),
-                          body: message.text,
-                          iconUrl: $("#hiddenNotificationIcon").val(),
-                          icon: $("#hiddenNotificationIcon").val()
-                        });
-                        return notification.onclick = function() {
-                          notification.close();
-                          window.open().close();
-                          return window.focus();
-                        };
-                        */
-                    });
-               function displayChatMessage(from, body) {
-                      $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#chatter'));
-                      $('#chatterBox')[0].scrollTop = $('#chatterBox')[0].scrollHeight;
-                    };
-
-              $(document).ready(function(){
-                  $('#chatterBox').animate({
-                      scrollTop: $('#chatterBox')[0].scrollHeight}, 2000);
-              });
-              $('#messageInput').keypress(function (e) {
-                    if (e.keyCode == 13 ) { //enter key
-                      myDataRef.once('value', function(snapshot) {
-                        var name = snapshot.val().firstname;
-                      })
-                          var text = $('#messageInput').val();
-
-                          //myDataRef.set('User ' + name + ' says ' + text);
-                          myDataRef.push({name: name, text: text});
-
-                      $('#messageInput').val('');
-
-                      
-                    }
-              });
-
-
-
-              </script>
-
+                <span id="nameholder" style="display:none;"></span>
               </div>
             </div>
           </div>
@@ -166,36 +115,60 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
-    <script>
 
+     <script>
+       var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
 
-      //$snapshot.val().firstname
+        //$snapshot.val().firstname
       function isUserLoggedIn(authData) {
       //Previously called authDataCallback by Firebase Docs https://www.firebase.com/docs/web/guide/user-auth.html
       if (authData) {
         //console.log('AUTH-ED', "https://vivid-torch-1590.firebaseio.com/users/" + authData.uid, authData);
         // console.log("User " + authData.uid + " is logged in with " + authData.provider);
-
-        var profileRef = new Firebase("https://vivid-torch-1590.firebaseio.com/users/" + authData.uid);
-        profileRef.once('value', function(snapshot) {
-          console.log('|||=====', snapshot.val().firstname);
-          $(".fname").text(snapshot.val().firstname);
-          $(".lname").text(snapshot.val().lastname);
-        });
-
-        
-
-        // console.log(dump(authData));
+      var profileRef = new Firebase("https://vivid-torch-1590.firebaseio.com/users/" + authData.uid);
+      profileRef.once('value', function(snapshot) {
+        $(".fname").text(snapshot.val().firstname);
+        $(".lname").text(snapshot.val().lastname);
+      });
+           // console.log(dump(authData));
       } else {
         console.log("User is logged out");
       }
     }
-    var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
+    
     ref.onAuth(isUserLoggedIn);
 
-    function disconnect(){
-      ref.unauth();
-    }
+      // REGISTER DOM ELEMENTS
+    var messageField = $('#messageInput');
+    var messageList = $('#example-messages');
+
+    // LISTEN FOR KEYPRESS EVENT
+    messageField.keypress(function (e) {
+      if (e.keyCode == 13) {
+        //FIELD VALUES  
+        var username = $(".fname").text();
+        var message = messageField.val();
+
+        //SAVE DATA TO FIREBASE AND EMPTY FIELD
+        ref.push({name:username, text:message});
+        messageField.val('');
+      }
+    });
+
+    ref.on('child_added', function(snapshot) {
+        var message = snapshot.val();
+        displayChatMessage(message.name, message.text);
+      });
+
+      function displayChatMessage(name, text) {
+        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#chatterBox'));
+        $('#chatterBox')[0].scrollTop = $('#chatterBox')[0].scrollHeight;
+      };
+
+    /*$(document).ready(function(){
+        $('#chatterBox').animate({
+            scrollTop: $('#chatterBox')[0].scrollHeight}, 2000);
+    });*/
 
     /* repeatString() returns a string which has been repeated a set number of times */ 
   function repeatString(str, num) {
@@ -205,6 +178,10 @@
       }
       return out;
   }
+
+    function disconnect(){
+      ref.unauth();
+    }       
 
       </script>
   </body>
