@@ -33,9 +33,9 @@ $(document).ready(function(){
 });
 $('#messageInput').keypress(function (e) {
   		if (e.keyCode == 13 ) { //enter key
-  			myDataRef.once('value', function(snapshot)) {
+  			myDataRef.once('value', function(snapshot) {
   				var name = snapshot.val().firstname;
-  			}
+  			})
           	var text = $('#messageInput').val();
 
           	//myDataRef.set('User ' + name + ' says ' + text);
