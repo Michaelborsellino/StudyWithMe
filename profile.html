@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" >
   <head>
+  
   <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
   <!--<script>var Firebase = require("firebase");</script>-->
     <meta charset="utf-8" />
@@ -10,9 +11,12 @@
     <link rel="shortcut icon" href="images/people.png" type="image">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
     <!-- attach CSS styles -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/profile.css" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdn.firebase.com/libs/firechat/2.0.0/firechat.min.css' />
+    <script src='./firechat/dist/firechat.js'></script>
 
        <!-- liveReload - So developers dont have to hit the refresh button. Delete in production version -->
   <!--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>-->
@@ -284,6 +288,22 @@ var globalarray = new Array(Array());
           }
         }
       }
+
+      var chatRef = new Firebase('https://vivid-torch-1590.firebaseio.com/chat');
+      chatRef.onAuth(function(authData) {
+        // Once authenticated, instantiate Firechat with our user id and user name
+        if (authData) {
+          var chat = new FirechatUI(chatRef, document.getElementById('firechat-wrapper'));
+          chat.setUser(authData.uid, authData[authData.provider].displayName);
+        }
+      });
+      function login(provider) {
+        chatRef.authWithOAuthPopup(provider, function(error, authData) {
+          if (error) {
+            console.log(error);
+          }
+        });
+      }
     function populatelist(){
       var id = 0;
       for(var x = 0; x < matches.length; ++x)
@@ -300,12 +320,12 @@ var globalarray = new Array(Array());
          }
          var newarray = matches.slice(x+2,d);
          var stringify = newarray.toString();
-         document.getElementById("userMatches").insertAdjacentHTML('beforeend','<div class = "row"><h3>'+matches[x+1]+'</h3><h2>'+stringify+'</h2></div>');
+         document.getElementById("userMatches").insertAdjacentHTML('beforeend','<div class = "sillywilly"><h3>'+matches[x+1]+'</h3><h2>'+stringify+'</h2><button onclick="startchat()">Chat</button></div>');
          x = d-1;
         }
       }
       var newstring = existingval2.toString();
-      document.getElementById("userCourses").insertAdjacentHTML('beforeend','<div class = "row2"><p>Courses You\'re In: '+newstring+'</p></div>');
+      document.getElementById("userCourses").insertAdjacentHTML('beforeend','<div class = "sillywilly2"><p>Courses You\'re In: '+newstring+'</p></div>');
     }
     setTimeout(function(){
       console.log(existingval2);
