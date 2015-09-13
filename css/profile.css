@@ -123,6 +123,10 @@ i {
   vertical-align: center;
 }
 
+.city {
+  text-align:left;
+}
+
 .signin-card{
     min-height: 550px;
     max-width:85%;
