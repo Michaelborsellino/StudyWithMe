@@ -65,7 +65,8 @@
           <hr>
           <div class="row">
             <div class="col-md-8">
-            &nbsp;</div>
+              &nbsp;
+            </div>
             <div class="col-md-4">
               <div id="chatterBox" class="panel-body">
                 <div class="panel panel-default">
@@ -74,6 +75,7 @@
                     </div>
                     <div id="chatterBox" class="panel-body">
                       <div id="chatter"></div>
+                      <input class="form-control" type='text' id='messageInput' placeholder='Message'>
                     </div>
                 </div>
                 <div id="chatter"></div>
@@ -115,6 +117,16 @@
       $(function(){
         $("#chatter").load("includes/chatterbox.html"); 
       });
+      function isUserLoggedIn(authData) {
+      //Previously called authDataCallback by Firebase Docs https://www.firebase.com/docs/web/guide/user-auth.html
+      if (authData) {
+        console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      } else {
+        console.log("User is logged out");
+      }
+    }
+    var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
+    ref.onAuth(isUserLoggedIn);
     </script>
   </body>
 
