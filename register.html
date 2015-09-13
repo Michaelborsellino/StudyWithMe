@@ -74,7 +74,7 @@
             
             <div class="field--wrapper">
               <label for="password">Password</label>
-              <input type="password" id ="pwd" placeholder="Password" class="form-control">
+              <input type="password" id="pwd" placeholder="Password" class="form-control">
             </div>
             
             <button type="button" onclick="validate()" class="btn btn-primary form-control">Sign Up For Free</button>
@@ -203,6 +203,13 @@ function redirect(){
           $(this).prev("label").removeClass(onClass);
       }).trigger("checkval");
     });
+
+  $(document).ready(function(){
+    $('#pwd').keypress(function(e){
+      if(e.keyCode==13)
+      validate()
+    });
+  });
 
 </script>
 </html>

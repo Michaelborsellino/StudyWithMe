@@ -69,7 +69,7 @@
 
             <div class="field--wrapper">
               <label for="password">password</label>
-              <input type="password" id ="pwd" placeholder="Password" class="form-control" name="password">
+              <input type="password" id="pwd" placeholder="Password" class="form-control" name="password">
             </div>
             
             <button type="button" onclick="validate()" class="btn btn-primary form-control">Sign In</button>
@@ -147,6 +147,14 @@
     }
     var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
     ref.onAuth(isUserLoggedIn);
+
+
+    $(document).ready(function(){
+    $('#pwd').keypress(function(e){
+      if(e.keyCode==13)
+      validate()
+    });
+  });
 
   </script>  
   </body>
