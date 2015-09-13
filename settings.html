@@ -67,11 +67,12 @@
             <form method="POST">
             <div id="dynamicInput">
             <hr>
-            Courses You are Enrolled In
+            Your Courses This Semester
             <br><input type="text" name="myInputs[]" placeholder="Course 1" class="form-control">
             </div>
-            <input type="button" value="Add Another Course" class="addCourse" onClick="addInput('dynamicInput');">
+            <a href="#!" class="addCourse" onClick="addInput('dynamicInput');"><i class="fa fa-plus" style="font-size: 11px"></i> Add Another Course</a>
             </form>
+            <br>
             <button type="button" onclick="validate()" class="btn btn-primary form-control">Save Changes</button>
             <br />
             <span style="clear:both;"></span>
