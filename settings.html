@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" >
   <head>
+  <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+  <!--<script>var Firebase = require("firebase");</script>-->
     <meta charset="utf-8" />
     <meta name="author" content="Script Tutorials" />
-    <title>Study With Me | Sign In</title>
+    <title>Study With Me | Profile Settings</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="shortcut icon" href="images/people.png" type="image">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <!-- attach CSS styles -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/signin.css" rel="stylesheet" />
-    <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+    <link href="css/settings.css" rel="stylesheet" />
 
-     <!-- liveReload - So developers dont have to hit the refresh button. Delete in production version -->
+       <!-- liveReload - So developers dont have to hit the refresh button. Delete in production version -->
   <!--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>-->
   </head>
 
@@ -24,12 +25,12 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-main">
-            <span class="sr-only">Toggle Navigation</span>
+            <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">Study With Me</a>
+          <a class="navbar-brand" href="#">Study With Me</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse-main">
@@ -45,37 +46,44 @@
 
     <!-- first section - Home -->
     <div id="home" class="home">
-      
-    <br>
-    <br>
-    <br>
 
 
-      <div class="text-vcenter">
+      <br>
+    <br>
+    <br>
+       <div class="text-vcenter">
         
-        <h2 class="darkGrey">Please Sign In</h2>
+        <h2 class="darkGrey">Let's Get Your Profile Set Up!</h2>
         <div class="signin-card">
-          <form class="form-signin" method="post">
-            <i class="glyphicon glyphicon-user signin-icon"></i>
-
-            <div class="field--wrapper">
-              <label for="email">Email</label>
-              <input type="text" id="usn" placeholder="Email" class="form-control" name="email">
-            </div>
-
-            <div class="field--wrapper">
-              <label for="password">password</label>
-              <input type="password" id ="pwd" placeholder="Password" class="form-control" name="password">
-            </div>
-            
-            <button type="button" onclick="validate()" class="btn btn-primary form-control">Sign In</button>
+          <form class="form-signin" action="demo_sign_me_in.php" method="post">
+            About You
+            <input type="text" id ="name" placeholder="First Name" class="form-control">
+            <br/>
+            <input type="text" id= "name" placeholder="Last Name" class="form-control">
             <br />
+            <input type="text" id= "school" placeholder="Full Name of Your University" class="form-control">
             <br />
-            <small style="float:right;"><a style="text-align:right;" class="blueLink" href="need-help.html">Need help?</a></small>
+            <script src="js/addInput.js" language="Javascript" type="text/javascript"></script>
+            <form method="POST">
+            <div id="dynamicInput">
+            <hr>
+            Courses You are Enrolled In
+            <br><input type="text" name="myInputs[]" placeholder="Course 1" class="form-control">
+            </div>
+            <input type="button" value="Add Another Course" class="addCourse" onClick="addInput('dynamicInput');">
+            </form>
+            <button type="button" onclick="validate()" class="btn btn-primary form-control">Save Changes</button>
+            <br />
             <span style="clear:both;"></span>
           </form>
         </div>
+        <br>
+        <br>
+        <br> 
       </div>
+    </div>
+
+
     </div>
     <!-- /first section -->
 
@@ -92,44 +100,28 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="js/jquery.localScroll.min.js"></script>
-
-    <script>
-    $(function float_label_form(){
-      var onClass = "on";
-      var showClass = "show";
-      
-      $("input").bind("checkval",function(){
-        var label = $(this).prev("label");
-        if(this.value !== ""){
-          label.addClass(showClass);
-        } else {
-          label.removeClass(showClass);
-        }
-      }).on("keyup",function(){
-        $(this).trigger("checkval");
-      }).on("focus",function(){
-        $(this).prev("label").addClass(onClass);
-      }).on("blur",function(){
-          $(this).prev("label").removeClass(onClass);
-      }).trigger("checkval");
-    });
-
-    function validate(){
-      var usn = document.getElementById("usn").value;
-      var pwd = document.getElementById("pwd").value;
-      var ref = new Firebase("https://vivid-torch-1590.firebaseio.com");
-      ref.authWithPassword({
-        email    : usn,
-        password : pwd
-      }, function(error, authData) {
-      if (error) {
-        console.log("Login Failed!", error);
-      } else {
-        console.log("Authenticated successfully with payload:", authData);
-      }
-      });
-    }
-  </script>  
   </body>
+
+<script>
   
+  var myFirebaseRef = new Firebase("https://vivid-torch-1590.firebaseio.com");
+
+  function validate(){
+    var usn = document.getElementById("usn").value;
+    var pwd = document.getElementById("pwd").value;
+    var ref = new Firebase("https://vivid-torch-1590.firebaseio.com")
+    
+    ref.createUser({
+      email    : usn,
+      password : pwd
+    }, function(error, userData) {
+    if (error) {
+      console.log("Error creating user:", error);
+    } else {
+      console.log("Successfully created user account with uid:", userData.uid);
+    }
+  });
+  }
+</script>
 </html>
+
